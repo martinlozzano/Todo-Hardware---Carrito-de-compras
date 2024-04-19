@@ -1,0 +1,21 @@
+.header-contenedor-carrito{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-inline: 2rem;
+    padding-block: .5rem;
+    color: $--clr-muyOscuro;
+    border-bottom: 5px double $--clr-oscuro;
+
+    h4 {
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .cerrar-carrito {
+        cursor: pointer;
+        .bi-x-square-fill{
+            font-size: 25px;
+        }
+    }
+}

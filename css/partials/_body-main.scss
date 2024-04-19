@@ -1,0 +1,18 @@
+main {
+    background-color: $--clr-claro;
+    padding-bottom: 2rem;
+    transition: all 0.3s;
+    
+    .imagen-fondo{
+        background-image: url("../img/background.webp");
+        background-size: cover;
+        height: 600px;
+        justify-content: center;
+    }
+
+    /* .sponsors {
+
+    } */
+
+    
+  }

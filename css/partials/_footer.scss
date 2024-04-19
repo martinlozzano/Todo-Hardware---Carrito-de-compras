@@ -1,0 +1,12 @@
+footer {
+    background-color: $--clr-muyOscuro;
+    height: 60px;
+
+    .copyright p{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: $--clr-claro;
+        height: 60px;
+    }
+}

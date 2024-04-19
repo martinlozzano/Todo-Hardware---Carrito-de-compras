@@ -1,0 +1,71 @@
+.contenedor-tarjetas {
+    padding-top: 2rem;
+    padding-inline: 200px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+
+    .tarjeta{
+        display: flex;
+        flex-direction: column;
+        justify-self: center;
+        text-align: center;
+        justify-content: start;
+        border-radius: 1.5rem;
+        border: 10px solid $--clr-oscuro;
+        width: 100%;
+        background-color: $--clr-oscuro;
+        transition: all .5s;
+
+        &:hover {
+            width: 110%;
+        }
+
+        img{
+            max-width: 100%;
+            border-radius: 1rem 1rem 0 0;
+        }
+
+        .detalle-producto {
+            background-color: $--clr-oscuro;
+            display: grid;
+            grid-template-rows: 2fr repeat(2, 1fr);
+            padding: 12px;
+            font-family: "Roboto Condensed", sans-serif;
+            font-optical-sizing: auto;
+            font-size: 20px;
+            height: 100%;
+            color: $--clr-claro;
+
+            .nombre-tarjeta {
+                font-weight: bold;
+                margin-bottom: 0;
+                text-decoration: underline $--clr-claro;
+            }
+
+            .precio-tarjeta {
+                width: 30%;
+                margin-bottom: 10px;
+                justify-self: end; 
+                font-size: 24px;
+            }
+
+            .boton-producto{
+                width: 125px;
+                background-color: $--clr-claroIntermedio;
+                align-self: center;
+                border-radius: 2rem;
+                height: 30px;
+                font-size: 15px;
+                align-self: end;
+                justify-self: center;
+                transition: all .5s;
+
+                &:hover {
+                    height: 35px;
+                    width: 150px;
+                }
+            }
+        }
+    }
+}

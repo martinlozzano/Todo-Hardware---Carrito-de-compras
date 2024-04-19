@@ -85,8 +85,8 @@ function cargadorDeProductos(productos){
         `;
 
         divDetalle.innerHTML = `
-            <h3> ${producto.nombre} </h3>
-            <span> $${producto.precio} </span>
+            <h3 class="nombre-tarjeta"> ${producto.nombre} </h3>
+            <span class="precio-tarjeta"> $${producto.precio} </span>
             `;
 
         let boton = document.createElement("button");
@@ -106,6 +106,7 @@ cargadorDeProductos(productos);
 
 //FUNCION AGREGAR AL CARRITO
 const carritoContador = document.querySelector("#contador-carrito");
+const carritoFlotanteContador = document.querySelector("#contador-carrito-flotante");
 
 function agregarCarrito(producto){
     const estaEnCarrito = carrito.find(item => (item.id === producto.id));
@@ -116,7 +117,7 @@ function agregarCarrito(producto){
         estaEnCarrito.cantidad++;
     }
     mostrarCarrito();
-    
+    carritoScroll();
 };
 
 function contadorCarrito() {
@@ -125,11 +126,12 @@ function contadorCarrito() {
         carrito.forEach( (item) => {
             contador += item.cantidad
             carritoContador.innerText = contador;
+            carritoFlotanteContador.innerText = contador;
         })
     }else {
         carritoContador.innerText = contador;
+        carritoFlotanteContador.innerText = contador;
     }
-    
 };
 
 //BOTON DARK MODE
@@ -144,28 +146,50 @@ colorDark.addEventListener("click", () =>{
 
 
 //BOTON CARRITO
-const spanTotal = document.querySelectorAll(".total")
-const botonCarrito = document.querySelector("#carrito");
+
+const spanTotal = document.querySelectorAll (".total");
 const contenedorCarritoBg = document.querySelector ("#bg-contenedor-carrito");
-const contenedorCarritoSm = document.querySelector ("#contenedor-carrito")
-botonCarrito.addEventListener("mouseover", () =>{
+const contenedorCarritoSm = document.querySelector ("#contenedor-carrito");
+const cerrarCarrito = document.querySelector ("#cerrar-carrito");
+const header = document.querySelector("#header");
+const alturaHeader = header.offsetHeight;
+const carritoFlotante = document.querySelector("#carrito-flotante");
+
+function carritoScroll () {
+    const scrollTop = document.documentElement.scrollTop;
+    if (contenedorCarritoBg.classList.contains("d-none")) {
+        if (scrollTop > alturaHeader) {
+            if (carrito.length > 0) {
+                carritoFlotante.classList.remove("d-none");
+            }else {
+                carritoFlotante.classList.add("d-none");
+            };
+        }else {
+            carritoFlotante.classList.add("d-none");
+        };
+    };
+};
+
+window.addEventListener("scroll", () => {
+    carritoScroll();
+});
+
+carritoFlotante.addEventListener("click", () => {
     contenedorCarritoBg.classList.remove("d-none");
+    carritoFlotante.classList.add("d-none");
 });
 
-contenedorCarritoBg.addEventListener("mouseover", () =>{
-    contenedorCarritoBg.classList.remove("d-none");
-});
-
-botonCarrito.addEventListener("mouseout", () => {
+cerrarCarrito.addEventListener("click", () => {
+    const scrollTop = document.documentElement.scrollTop;
     contenedorCarritoBg.classList.add("d-none");
+    if (carrito.length > 0) {
+        if (scrollTop !== 0) {
+            carritoFlotante.classList.remove("d-none");
+        }
+    }
 });
 
-contenedorCarritoBg.addEventListener("mouseout", () => {
-    contenedorCarritoBg.classList.add("d-none");
-});
-
-
-function mostrarCarrito(){
+function mostrarCarrito() {
     contenedorCarritoSm.innerHTML = ""; 
     carrito.forEach((item) => {
         let divCarrito = document.createElement("div");
@@ -181,23 +205,20 @@ function mostrarCarrito(){
             <span>x${item.cantidad}</span>
         `;
 
-        let botonMenos = document.createElement("button");
-        botonMenos.classList.add("menos-cantidad");
-        botonMenos.innerText = "-";
+        let botonMenos = document.createElement("i");
+        botonMenos.classList.add("bi", "bi-dash-square", "menos-cantidad");
         botonMenos.addEventListener("click", () => {
             menosCantidad(item);
         });
 
-        let botonMas = document.createElement("button");
-        botonMas.classList.add("mas-cantidad");
-        botonMas.innerText = "+";
+        let botonMas = document.createElement("i");
+        botonMas.classList.add("bi", "bi-plus-square", "mas-cantidad");
         botonMas.addEventListener("click", () => {
             masCantidad(item);
         });
 
-        let botonEliminar = document.createElement("button");
-        botonEliminar.classList.add("eliminar-carrito");
-        botonEliminar.innerText = "X";
+        let botonEliminar = document.createElement("i");
+        botonEliminar.classList.add("bi", "bi-trash-fill", "eliminar-carrito");
         botonEliminar.addEventListener("click", () => {
             eliminarCarrito(item);
         });
@@ -209,6 +230,11 @@ function mostrarCarrito(){
         divCarrito.append(botonEliminar);
         contenedorCarritoSm.append(divCarrito)          
     });
+
+    if (carrito.length === 0) {
+        contenedorCarritoBg.classList.add("d-none");
+    }
+
     calcularTotal();
     contadorCarrito();
     localStorage.setItem("productos", JSON.stringify(carrito));
@@ -376,3 +402,4 @@ continuarMensaje.addEventListener("click", () => {
 })
 
 mostrarCarrito();
+

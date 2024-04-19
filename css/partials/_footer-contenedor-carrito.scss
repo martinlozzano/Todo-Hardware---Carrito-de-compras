@@ -1,0 +1,26 @@
+.footer-carrito{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: $--clr-muyOscuro;
+    padding-inline: 2rem;
+    padding-block: .8rem;
+    border-top: 5px double $--clr-oscuro;
+
+    .mostrar-total {
+        text-align: center;
+        h5 {
+            padding-right: 4px;
+            font-size: 20px;
+            margin-bottom: 4px;
+            text-decoration: underline $--clr-muyOscuro;
+            text-transform: uppercase;
+        }
+
+        .total {
+            font-weight: 600;
+            font-size: 17px;
+        }
+    }
+}

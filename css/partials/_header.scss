@@ -1,0 +1,35 @@
+header {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 1;
+    font-family: "Roboto Condensed", sans-serif;
+    font-optical-sizing: auto;
+
+    .contenedor-header {
+        background-color: $--clr-claro;
+        color: $--clr-muyOscuro;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 80px;
+        padding-inline: 40px;
+        width: 85%;
+        border-radius: 0 0 2rem 2rem;
+        border: 1px solid $--clr-muyOscuro;
+        border-top: 0px solid;
+
+        h1 {
+            font-weight: bold;
+            font-style: italic;
+            font-size: 40px;
+        }
+
+        .navegacion {
+            width: 300px;
+            display: flex;
+            justify-content: space-between;
+          }
+      }
+  }

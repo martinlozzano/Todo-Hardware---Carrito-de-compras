@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="./css/main.css">
 </head>
 <body>
-    <header class="">
-
+    <header id="header">
         <div class="contenedor-header">
             <h1>TodoHardware</h1>
             <div class="navegacion">
@@ -31,30 +30,53 @@
                     <i class="bi bi-moon"></i>
                 </div>
                 <div class="carrito" id="carrito">
-                    <span class="contador-carrito" id="contador-carrito">0</span>
+                    <div class="contenedor-contador">
+                        <span class="contador-carrito" id="contador-carrito">0</span>
+                    </div>
                     <i class="bi bi-cart3"></i>
                 </div>
             </div>
         </div>
-
     </header>
 
     <main>
         <section class="imagen-fondo">
         </section>
 
-        <section class="sponsors">
-
+        <section class="contenedor-sponsors">
+            <h2>sponsors</h2>
+            <section class="sponsors">
+                <img src="./img/carrusel/amd.webp" alt="">
+                <img src="./img/carrusel/aourus.jpg" alt="">
+                <img src="./img/carrusel/asus.jpg" alt="">
+                <img src="./img/carrusel/corsair.avif" alt="">
+                <img src="./img/carrusel/gigabyte.jpg" alt="">
+                <img src="./img/carrusel/hyperx.jpg" alt="">
+                <img src="./img/carrusel/intel.webp" alt="">
+                <img src="./img/carrusel/kingstone.jpg" alt="">
+                <img src="./img/carrusel/logitech.jpg" alt="">
+                <img src="./img/carrusel/nvidia.webp" alt="">
+            </section>
         </section>
 
-        <section class="contenedor-main" id="productos">
+        <section class="contenedor-tarjetas" id="productos">
             <!-- SE AGREGA DINAMICAMENTE DESDE JS -->
         </section>
+
+        <div id="carrito-flotante" class="contenedor-carrito-flotante d-none">
+            <div class="contador-carrito-flotante">
+                <p class="contador-carrito" id="contador-carrito-flotante">0</p>
+            </div>
+            <i class="bi bi-bag"></i>
+        </div>
+
         <section class="bg-contenedor-carrito d-none" id="bg-contenedor-carrito">
             <div class="header-contenedor-carrito" id="header-carrito">
-                <h4>PRODUCTO</h4>
-                <h4>PRECIO</h4>
-                <h4>CANTIDAD</h4>
+                <h4>CARRITO</h4>
+                <div class="cerrar-carrito" id="cerrar-carrito">
+                    <i class="bi bi-x-square-fill"></i>
+                </div>
+                
             </div>    
             <div class="contenedor-carrito" id="contenedor-carrito">
                 <!-- SE AGREGA DINAMICAMENTE CON EL BOTON AGREGAR --> 
