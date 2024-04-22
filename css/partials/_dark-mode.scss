@@ -1,6 +1,39 @@
 .dark-mode {
-    background-color: $--clr-casiMuyOscuro;
-    color: $--clr-claro;
+    .contenedor-header {
+        background-color: $--clr-muyOscuro;
+        * {
+            color: $--clr-muyClaro;
+        }
+        .container-fluid {
+            button {
+                color: $--clr-muyClaro;
+                border: 1px solid $--clr-muyClaro;
+            }
+
+            .navegacion {
+                .menu {
+                    background-color: $--clr-muyOscuro;
+                    .menu-link {
+                        color: $--clr-muyClaro;
+                    }
+                }
+            }
+
+            .contenedor-contador {
+                background-color: $--clr-muyClaro;
+                * {
+                    color: $--clr-muyOscuro;
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+
+    main {
+        background-color: $--clr-casiMuyOscuro;
+        color: $--clr-claro;
+    }
 
     .contenedor-sponsors {
         h2 {

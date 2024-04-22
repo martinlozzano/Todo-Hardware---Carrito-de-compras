@@ -1,0 +1,23 @@
+.formularios {
+    form {
+        padding-block: 10px;
+        font-size: 20px;
+
+        ul {
+            padding-inline: 35px;
+            margin: 0;
+    
+            li {
+                list-style: none;
+                margin-block: 20px;
+                padding: 5px 10px;
+                border: 1px dashed $--clr-oscuro;
+                border-radius: 2rem;
+                label {
+                    display: flex;
+                    justify-content: space-between;
+                }
+            }
+        }
+    }
+}

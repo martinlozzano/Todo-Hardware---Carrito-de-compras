@@ -7,14 +7,17 @@
     padding-inline: 2rem;
     padding-block: .8rem;
     border-top: 5px double $--clr-oscuro;
+    background-color: $--clr-claro;
+    border-radius: 0 0 2rem 2rem;
 
     .mostrar-total {
         text-align: center;
+        
         h5 {
             padding-right: 4px;
             font-size: 20px;
             margin-bottom: 4px;
-            text-decoration: underline $--clr-muyOscuro;
+            text-decoration: underline;
             text-transform: uppercase;
         }
 
@@ -22,5 +25,17 @@
             font-weight: 600;
             font-size: 17px;
         }
+    }
+
+    button {
+        border-radius: 1rem;
+        border: 1px solid $--clr-muyOscuro;
+        width: 100px;
+        background-color: $--clr-muyClaro;
+        color: $--clr-muyOscuro;
+    }
+
+    @media (max-width: 768px) {
+        border-radius: 0;
     }
 }

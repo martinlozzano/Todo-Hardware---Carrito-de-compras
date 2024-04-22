@@ -35,19 +35,20 @@
             font-optical-sizing: auto;
             font-size: 20px;
             height: 100%;
-            color: $--clr-claro;
+            color: $--clr-muyOscuro;
 
             .nombre-tarjeta {
                 font-weight: bold;
                 margin-bottom: 0;
-                text-decoration: underline $--clr-claro;
+                text-decoration: underline;
             }
 
             .precio-tarjeta {
-                width: 30%;
+                width: 50%;
                 margin-bottom: 10px;
                 justify-self: end; 
                 font-size: 24px;
+                align-self: center;
             }
 
             .boton-producto{
@@ -60,6 +61,7 @@
                 align-self: end;
                 justify-self: center;
                 transition: all .5s;
+                border: 1px solid $--clr-oscuroIntermedio;
 
                 &:hover {
                     height: 35px;
@@ -67,5 +69,49 @@
                 }
             }
         }
+    }
+
+    @media (max-width: 1200px) {
+        grid-template-columns: repeat(3, 1fr);
+        .tarjeta{
+            .detalle-producto {
+                .nombre-tarjeta{
+                    font-size: 25px;
+                }
+                .precio-tarjeta {
+                    font-size: 18px;
+                }
+            }
+       }     
+    }
+
+    @media (max-width: 992px) {
+        grid-template-columns: repeat(2, 1fr);
+        padding-inline: 100px;
+        .tarjeta{
+            .detalle-producto {
+                .precio-tarjeta {
+                    font-size: 22px;
+                }
+            }
+       }     
+    }
+
+    @media (max-width: 768px) {
+        padding-inline: 80px;
+        .tarjeta{
+            .detalle-producto {
+                .nombre-tarjeta{
+                    font-size: 20px;
+                }
+                .precio-tarjeta {
+                    font-size: 20px;
+                }
+            }
+       }       
+    }
+
+    @media (max-width: 576px) {
+        padding-inline: 30px;
     }
 }

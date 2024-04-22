@@ -1,5 +1,4 @@
 const carrito = JSON.parse(localStorage.getItem("productos"))|| [];
-
 const productos = [
     {
         id: "cpu1",
@@ -137,11 +136,18 @@ function contadorCarrito() {
 //BOTON DARK MODE
 
 const colorDark = document.querySelector("#dark-button");
-const body = document.querySelector("main");
+const body = document.querySelector("body");
 
 colorDark.addEventListener("click", () =>{
     body.classList.toggle("dark-mode");
-    colorDark.classList.toggle("btn-oscuro");
+
+    if (colorDark.classList.contains("bi-moon")) {
+        colorDark.classList.remove("bi-moon");
+        colorDark.classList.add("bi-sun");
+    }else {
+        colorDark.classList.remove("bi-sun");
+        colorDark.classList.add("bi-moon");
+    };    
 });
 
 
@@ -154,6 +160,7 @@ const cerrarCarrito = document.querySelector ("#cerrar-carrito");
 const header = document.querySelector("#header");
 const alturaHeader = header.offsetHeight;
 const carritoFlotante = document.querySelector("#carrito-flotante");
+const carritoHeader = document.querySelector ("#carrito-header");
 
 function carritoScroll () {
     const scrollTop = document.documentElement.scrollTop;
@@ -177,6 +184,12 @@ window.addEventListener("scroll", () => {
 carritoFlotante.addEventListener("click", () => {
     contenedorCarritoBg.classList.remove("d-none");
     carritoFlotante.classList.add("d-none");
+});
+
+carritoHeader.addEventListener("click", () => {
+    if (carrito.length > 0) {
+        contenedorCarritoBg.classList.toggle("d-none");
+    }
 });
 
 cerrarCarrito.addEventListener("click", () => {
@@ -263,7 +276,7 @@ function menosCantidad (producto) {
     mostrarCarrito();
 };
 
-let total;
+let total = 0;
 
 function calcularTotal() {
     total = 0;
@@ -279,105 +292,132 @@ function calcularTotal() {
     return total;
 };
 
-const continuar = document.querySelector("#boton-continuar")
-const headerCarrito = document.querySelector("#header-carrito")
-const footerCarrito = document.querySelector("#footer-carrito")
-const elegirEntrega = document.querySelector("#elegir-entrega")
+const continuar = document.querySelector("#boton-continuar");
+const elegirEntrega = document.querySelector("#elegir-entrega");
+const volverEntrega = document.querySelector ("#boton-volver-entrega");
+const continuarEntrega = document.querySelector ("#boton-continuar-entrega");
+
 
 continuar.addEventListener("click", () => {
     contenedorCarritoSm.classList.add("d-none");
-    headerCarrito.classList.add("d-none");
-    footerCarrito.classList.add("d-none");
+    continuar.classList.add("d-none");
     elegirEntrega.classList.remove("d-none");
-
-})
-
-elegirEntrega.addEventListener("mouseover", () => {
-    contenedorCarritoSm.classList.add("d-none");
-    headerCarrito.classList.add("d-none");
-    footerCarrito.classList.add("d-none");
-    elegirEntrega.classList.remove("d-none");
-})
+    volverEntrega.classList.remove("d-none");
+    continuarEntrega.classList.remove("d-none");
+});
 
 const opcionEntregaLoc = document.querySelector("#entrega-local");
 const opcionEntregaDom = document.querySelector("#entrega-domicilio");
-const continuarEntrega = document.querySelector("#boton-continuar-entrega");
 const elegirPago = document.querySelector("#elegir-pago");
+const continuarPago = document.querySelector("#boton-continuar-pago");
+const volverPago = document.querySelector("#boton-volver-pago");
 
 continuarEntrega.addEventListener("click", () => {
-    if (opcionEntregaLoc.checked){
+   if (opcionEntregaLoc.checked){
         elegirEntrega.classList.add("d-none");
+        volverEntrega.classList.add("d-none");
+        continuarEntrega.classList.add("d-none");
         elegirPago.classList.remove("d-none");
+        continuarPago.classList.remove("d-none")
+        volverPago.classList.remove("d-none")
     }else if (opcionEntregaDom.checked){
-        total += 2000;
         elegirEntrega.classList.add("d-none");
+        volverEntrega.classList.add("d-none");
+        continuarEntrega.classList.add("d-none");
         elegirPago.classList.remove("d-none");
+        continuarPago.classList.remove("d-none");
+        volverPago.classList.remove("d-none");
     };
 });
 
-const continuarPago = document.querySelector("#boton-continuar-pago");
+volverEntrega.addEventListener("click", () => {
+    contenedorCarritoSm.classList.remove("d-none");
+    elegirEntrega.classList.add("d-none");
+    volverEntrega.classList.add("d-none");
+    continuarEntrega.classList.add("d-none");
+    continuar.classList.remove("d-none");
+});
+
 const opcionEfectivo = document.querySelector("#pago-efectivo");
 const opcionDebito = document.querySelector("#pago-debito");
 const opcionCredito = document.querySelector("#pago-credito");
-const pagar = document.querySelector("#confirmar-pagar")
+const pagar = document.querySelector("#confirmar-pagar");
+const continuarCredito = document.querySelector("#boton-continuar-credito");
+const volverCredito = document.querySelector("#boton-volver-credito");
+const elegirCredito = document.querySelector("#elegir-credito");
+const confirmarSi = document.querySelector("#boton-confirmar-si");
+const confirmarNo = document.querySelector("#boton-confirmar-no");
+const footerCarrito = document.querySelector ("#footer-carrito");
 
 continuarPago.addEventListener("click", () => {
     if (opcionEfectivo.checked){
-        total *= 0.85;
         elegirPago.classList.add("d-none");
+        footerCarrito.classList.add("d-none");
         pagar.classList.remove("d-none");
+        continuarPago.classList.add("d-none");
+        volverPago.classList.add("d-none");
     }else if (opcionDebito.checked) {
         elegirPago.classList.add("d-none");
+        footerCarrito.classList.add("d-none");
         pagar.classList.remove("d-none");
+        continuarPago.classList.add("d-none");
+        volverPago.classList.add("d-none");
     }else if (opcionCredito.checked) {
         elegirPago.classList.add("d-none");
         elegirCredito.classList.remove("d-none");
+        continuarPago.classList.add("d-none");
+        volverPago.classList.add("d-none");
+        continuarCredito.classList.remove("d-none");
+        volverCredito.classList.remove("d-none");
     };
 });
 
-const elegirCredito = document.querySelector("#elegir-credito");
+volverPago.addEventListener("click", () => {
+    elegirPago.classList.add("d-none");
+    continuarPago.classList.add("d-none");
+    volverPago.classList.add("d-none");
+    elegirEntrega.classList.remove("d-none");
+    volverEntrega.classList.remove("d-none");
+    continuarEntrega.classList.remove("d-none");
+});
+
 const opcionTresCuotas = document.querySelector("#tres-cuotas");
 const opcionSeisCuotas = document.querySelector("#seis-cuotas");
 const opcionDoceCuotas = document.querySelector("#doce-cuotas");
-const continuarCredito = document.querySelector("#boton-continuar-credito");
 
 continuarCredito.addEventListener("click", () => {
     if (opcionTresCuotas.checked){
         elegirCredito.classList.add("d-none");
         pagar.classList.remove("d-none");
+        footerCarrito.classList.add("d-none");
+        continuarCredito.classList.add("d-none");
+        volverCredito.classList.add("d-none");
     }else if (opcionSeisCuotas.checked) {
         elegirCredito.classList.add("d-none");
         pagar.classList.remove("d-none");
+        footerCarrito.classList.add("d-none");
+        continuarCredito.classList.add("d-none");
+        volverCredito.classList.add("d-none");
     }else if (opcionDoceCuotas.checked) {
         elegirCredito.classList.add("d-none");
         pagar.classList.remove("d-none");
+        footerCarrito.classList.add("d-none");
+        continuarCredito.classList.add("d-none");
+        volverCredito.classList.add("d-none");
     };
-});
-
-const volverEntrega = document.querySelector("#boton-volver-entrega");
-const volverCredito = document.querySelector("#boton-volver-credito");
-const volverPago = document.querySelector("#boton-volver-pago");
-const confirmarSi = document.querySelector("#boton-confirmar-si");
-const confirmarNo = document.querySelector("#boton-confirmar-no");
-const mensaje = document.querySelector("#mensaje")
-const continuarMensaje = document.querySelector("#continuar-mensaje")
-
-volverEntrega.addEventListener("click", () => {
-    contenedorCarritoSm.classList.remove("d-none");
-    headerCarrito.classList.remove("d-none");
-    footerCarrito.classList.remove("d-none");
-    elegirEntrega.classList.add("d-none");
 });
 
 volverCredito.addEventListener("click", () => {
     elegirCredito.classList.add("d-none");
     elegirPago.classList.remove("d-none");
+    continuarCredito.classList.add("d-none");
+    volverCredito.classList.add("d-none");
+    continuarPago.classList.remove("d-none");
+    volverPago.classList.remove("d-none");
 });
 
-volverPago.addEventListener("click", () => {
-    elegirPago.classList.add("d-none");
-    elegirEntrega.classList.remove("d-none");
-});
+const mensaje = document.querySelector("#mensaje");
+const continuarMensaje = document.querySelector("#continuar-mensaje");
 
 confirmarSi.addEventListener("click", () => {
     mensaje.classList.remove("d-none");
@@ -387,19 +427,18 @@ confirmarSi.addEventListener("click", () => {
 confirmarNo.addEventListener("click", () => {
     pagar.classList.add("d-none");
     contenedorCarritoSm.classList.remove("d-none");
-    headerCarrito.classList.remove("d-none");
     footerCarrito.classList.remove("d-none");
+    continuar.classList.remove("d-none");
 });
 
 continuarMensaje.addEventListener("click", () => {
     mensaje.classList.add("d-none");
     contenedorCarritoSm.classList.remove("d-none");
-    headerCarrito.classList.remove("d-none");
     footerCarrito.classList.remove("d-none");
+    continuar.classList.remove("d-none");
     carrito.splice(0, carrito.length);
     total = 0;
     mostrarCarrito();
 })
 
 mostrarCarrito();
-

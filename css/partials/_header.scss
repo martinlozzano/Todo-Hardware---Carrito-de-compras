@@ -10,9 +10,6 @@ header {
     .contenedor-header {
         background-color: $--clr-claro;
         color: $--clr-muyOscuro;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
         height: 80px;
         padding-inline: 40px;
         width: 85%;
@@ -20,16 +17,177 @@ header {
         border: 1px solid $--clr-muyOscuro;
         border-top: 0px solid;
 
-        h1 {
-            font-weight: bold;
-            font-style: italic;
-            font-size: 40px;
+
+        .container-fluid {
+            padding-inline: 0 ;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            h1 {
+                font-weight: bold;
+                font-style: italic;
+                font-size: 40px;
+                margin: 0;
+                text-align: center;
+            }
+
+            button {
+                border: 1px solid $--clr-muyOscuro;
+                .bi {
+                    font-size: 20px;
+                    color: $--clr-muyOscuro;
+                }
+            }
+    
+            .navegacion {
+                padding-top: 10px;
+                justify-content: center;
+                .menu {
+                    gap: 2.5rem;
+                    background-color: $--clr-claro;
+                    .menu-link {
+                        color: $--clr-muyOscuro;
+                        text-decoration: none;
+                        font-size: 20px;
+                        
+                        &:hover {
+                            text-decoration: underline ;
+                            font-size: 22px;
+                        }
+                    }
+                }
+            }
+        }
+        
+
+        @media (max-width: 1200px) {
+            .container-fluid {
+                h1 {
+                    font-size: 35px;
+                }
+                .navegacion {
+                    .menu {
+                        .menu-item {
+                            .menu-link {
+                                font-size: 18px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      
+        @media (max-width: 992px) {
+            .container-fluid {
+                h1 {
+                    padding: 10px;
+                }
+
+                button {
+                    order: -1;
+                    max-width: 3.5rem;
+                }
+                
+                .navegacion {
+                    grid-column: 1/4;
+                    grid-row: 2;
+                    padding: 0;
+                    margin-top: 10px;
+                    font-weight: bold;
+                    width: 100%;
+                
+                    .menu {
+                        background-color: rgba($--clr-claro, .8);
+                        padding: 10px;
+                        align-items: center;
+                        border-radius: 0 0 2rem 2rem;
+                        border: 1px solid $--clr-oscuro;
+                        border-top: 0px;
+                        
+                        .menu-item {
+                            border-bottom: 1px solid $--clr-oscuro;
+                            width: 95%;
+                            text-align: center;
+
+                            .menu-link {
+                                font-size: 25px;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+      
+        @media (max-width: 768px) {
+            .container-fluid {
+                button {
+                    font-size: 16px;
+                }
+
+            }
         }
 
-        .navegacion {
-            width: 300px;
-            display: flex;
-            justify-content: space-between;
-          }
-      }
+        @media (max-width: 650px) {
+            .container-fluid {
+                h1 {
+                    font-size: 28px;
+                }
+
+                .contenedor-carrito-boton {
+                    gap: 3rem;
+                    .contenedor-boton *{
+                        font-size: 18px;
+                    }
+                    
+                    .carrito {
+                        .contenedor-contador {
+                            width: 18px;
+                            height: 18px;
+                            right: -32px;
+                        }
+                        
+                        i{
+                            font-size: 25px;
+                        }
+                    }
+                }
+            }
+        }
+      
+        @media (max-width: 576px) {
+            height: 60px;
+
+            .container-fluid {
+                button {
+                    font-size: 13px;
+                    width: 2.8rem;
+                }
+
+                .navegacion {
+                    margin-top: -3px;
+                }
+
+                .contenedor-carrito-boton {
+                    gap: 1rem;
+                    .contenedor-boton *{
+                        font-size: 16px;
+                    }
+                    
+                    .carrito {
+                        .contenedor-contador {
+                            width: 17px;
+                            height: 17px;
+                            right: -28px;
+                            .contador-carrito {
+                                font-size: 10px;
+                            }
+                        }
+                        
+                        i{
+                            font-size: 22px;
+                        }
+                    }
+                }
+            }
+        }
+    }
   }

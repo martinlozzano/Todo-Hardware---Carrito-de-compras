@@ -1,5 +1,5 @@
 main {
-    background-color: $--clr-claro;
+    background-color: $--clr-muyClaro;
     padding-bottom: 2rem;
     transition: all 0.3s;
     
@@ -8,11 +8,10 @@ main {
         background-size: cover;
         height: 600px;
         justify-content: center;
-    }
+        opacity: .9;
 
-    /* .sponsors {
-
-    } */
-
-    
+        @media (max-width: 576px) {
+            height: 250px;
+        }           
+    }    
   }

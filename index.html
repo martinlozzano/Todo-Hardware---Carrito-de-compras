@@ -13,27 +13,35 @@
 </head>
 <body>
     <header id="header">
-        <div class="contenedor-header">
-            <h1>TodoHardware</h1>
-            <div class="navegacion">
-                <span>Productos</span>
-                <span>Ayuda</span>
-                <span>Marcas Sponsor</span>
-            </div>
-            <div class="contenedor-carrito-boton">
-                <div class="contenedor-boton">
-                    <i class="bi bi-sun"></i>
-                    <label class="switch" >
-                        <input type="checkbox" id="dark-button">
-                        <span class="slider round"></span>
-                    </label>
-                    <i class="bi bi-moon"></i>
+        <nav class="nav navbar contenedor-header navbar-expand-lg">
+            <div class="container-fluid">
+                <h1 class= "navbar-brand">TodoHardware</h1>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="bi bi-list"></i>
+                </button>
+                <div class="collapse navbar-collapse navegacion" id="navbarNav">
+                    <ul class="menu navbar-nav">
+                        <li class="menu-item">
+                            <a class="menu-link" href="#seccion-productos">Productos</a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="#sponsors">Sponsors</a>
+                        </li>
+                        <li class="menu-item">
+                            <a class="menu-link" href="">Ayuda</a>
+                        </li>
+                    </ul>
                 </div>
-                <div class="carrito" id="carrito">
-                    <div class="contenedor-contador">
-                        <span class="contador-carrito" id="contador-carrito">0</span>
+                <div class="contenedor-carrito-boton">
+                    <div class="contenedor-boton">
+                        <i class="bi bi-moon" id="dark-button"></i>
                     </div>
-                    <i class="bi bi-cart3"></i>
+                    <div class="carrito" id="carrito-header">
+                        <div class="contenedor-contador">
+                            <span class="contador-carrito" id="contador-carrito">0</span>
+                        </div>
+                        <i class="bi bi-cart3"></i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -43,8 +51,8 @@
         <section class="imagen-fondo">
         </section>
 
-        <section class="contenedor-sponsors">
-            <h2>sponsors</h2>
+        <section class="contenedor-sponsors" id="sponsors">
+            <h2 class="titulo-seccion">sponsors</h2>
             <section class="sponsors">
                 <img src="./img/carrusel/amd.webp" alt="">
                 <img src="./img/carrusel/aourus.jpg" alt="">
@@ -59,9 +67,12 @@
             </section>
         </section>
 
-        <section class="contenedor-tarjetas" id="productos">
-            <!-- SE AGREGA DINAMICAMENTE DESDE JS -->
-        </section>
+        <div id="seccion-productos">
+            <h2 class="titulo-seccion">productos</h2>
+            <section class="contenedor-tarjetas" id="productos">
+                <!-- SE AGREGA DINAMICAMENTE DESDE JS -->
+            </section>
+        </div>
 
         <div id="carrito-flotante" class="contenedor-carrito-flotante d-none">
             <div class="contador-carrito-flotante">
@@ -76,22 +87,13 @@
                 <div class="cerrar-carrito" id="cerrar-carrito">
                     <i class="bi bi-x-square-fill"></i>
                 </div>
-                
             </div>    
+
             <div class="contenedor-carrito" id="contenedor-carrito">
                 <!-- SE AGREGA DINAMICAMENTE CON EL BOTON AGREGAR --> 
             </div>
-            <div class="footer-carrito" id="footer-carrito">
-                <div class="mostrar-total">
-                    <h5>Total: </h5>
-                    <span class="total">$0</span>
-                </div>
-                <div class="boton-continuar">
-                    <button id="boton-continuar">Continuar</button>
-                </div>
-            </div>
-            
-            <div class="formulario-entrega d-none" id="elegir-entrega">
+
+            <div class="formulario-entrega d-none formularios" id="elegir-entrega">
                 <form action="">
                     <ul class="lista-form">
                         <li class="item-form">
@@ -109,22 +111,9 @@
                         </li>
                     </ul>
                 </form>
-
-                <div class="form-footer">
-                    <div class="mostrar-total">
-                        <h5>Total:</h5>
-                        <span class="total" >$0</span>
-                    </div>
-                    <button id="boton-volver-entrega">
-                        VOLVER
-                    </button>
-                    <button id="boton-continuar-entrega">
-                        CONTINUAR
-                    </button>
-                </div>
             </div>
 
-            <div class="formulario-pago d-none" id="elegir-pago">
+            <div class="formulario-pago d-none formularios" id="elegir-pago">
                 <form action="">
                     <ul class="lista-form">
                         <li class="item-form">
@@ -148,22 +137,9 @@
                         </li>
                     </ul>
                 </form>
-                
-                <div class="form-footer">
-                    <div class="mostrar-total">
-                        <h5>Total:</h5>
-                        <span class="total" >$0</span>
-                    </div>
-                    <button id="boton-volver-pago">
-                        VOLVER
-                    </button>
-                    <button id="boton-continuar-pago">
-                        CONTINUAR
-                    </button>
-                </div>
             </div>
 
-            <div class="formulario-credito d-none" id="elegir-credito">
+            <div class="formulario-credito d-none formularios" id="elegir-credito">
                 <form action="">
                     <ul class="lista-form">
                         <li class="item-form">
@@ -186,21 +162,44 @@
                         </li>
                     </ul>
                 </form>
-                
-                <div class="form-footer">
-                    <div class="mostrar-total">
-                        <h5>Total:</h5>
-                        <span class="total" >$0</span>
-                    </div>
-                    <button id="boton-volver-credito">
-                        VOLVER
-                    </button>
-                    <button id="boton-continuar-credito">
-                        CONTINUAR
-                    </button>
-                </div>
             </div>
 
+            <div class="footer-carrito" id="footer-carrito">
+                <div class="mostrar-total">
+                    <h5>Total: </h5>
+                    <span class="total">$0</span>
+                </div>
+                <div class="botones">
+                    <div class="botones-primero activo">
+                        <button class="boton-continuar" id="boton-continuar">Continuar</button>
+                    </div>
+                    <div class="botones-entrega">
+                        <button class="d-none" id="boton-volver-entrega">
+                            VOLVER
+                        </button>
+                        <button class="d-none" id="boton-continuar-entrega">
+                            CONTINUAR
+                        </button>
+                    </div>
+                    <div class="botones-pago">
+                        <button class="d-none" id="boton-volver-pago">
+                            VOLVER
+                        </button>
+                        <button class="d-none" id="boton-continuar-pago">
+                            CONTINUAR
+                        </button>
+                    </div>
+                    <div class="botones-credito">
+                        <button class="d-none" id="boton-volver-credito">
+                            VOLVER
+                        </button>
+                        <button class="d-none" id="boton-continuar-credito">
+                            CONTINUAR
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
             <div class="confirmar-pagar d-none" id="confirmar-pagar">
                 <div class="mostrar-total">
                     <h5>Total:</h5>
