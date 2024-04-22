@@ -137,9 +137,9 @@ header .contenedor-header .container-fluid .navegacion .menu .menu-link:hover {
 @media (max-width: 576px) {
   header .contenedor-header {
     height: 60px;
+    width: 100%;
   }
   header .contenedor-header .container-fluid button {
-    font-size: 13px;
     width: 2.8rem;
   }
   header .contenedor-header .container-fluid .navegacion {
@@ -295,8 +295,15 @@ main .imagen-fondo {
     grid-template-columns: repeat(2, 1fr);
     padding-inline: 100px;
   }
+  .contenedor-tarjetas .tarjeta:hover {
+    width: 100%;
+  }
   .contenedor-tarjetas .tarjeta .detalle-producto .precio-tarjeta {
     font-size: 22px;
+  }
+  .contenedor-tarjetas .tarjeta .detalle-producto .boton-producto:hover {
+    width: 100%;
+    height: 30px;
   }
 }
 @media (max-width: 768px) {
@@ -312,6 +319,7 @@ main .imagen-fondo {
 }
 @media (max-width: 576px) {
   .contenedor-tarjetas {
+    gap: 1rem;
     padding-inline: 30px;
   }
 }
@@ -561,8 +569,10 @@ main .imagen-fondo {
   color: #f2fbf9;
 }
 .dark-mode .contenedor-header .container-fluid button {
-  color: #f2fbf9;
   border: 1px solid #f2fbf9;
+}
+.dark-mode .contenedor-header .container-fluid button i {
+  color: #f2fbf9;
 }
 .dark-mode .contenedor-header .container-fluid .navegacion .menu {
   background-color: #0a2829;

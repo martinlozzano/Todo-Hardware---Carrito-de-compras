@@ -6,8 +6,10 @@
         }
         .container-fluid {
             button {
-                color: $--clr-muyClaro;
                 border: 1px solid $--clr-muyClaro;
+                i {
+                    color: $--clr-muyClaro;
+                }
             }
 
             .navegacion {
