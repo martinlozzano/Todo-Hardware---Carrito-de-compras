@@ -1,4 +1,6 @@
 const carrito = JSON.parse(localStorage.getItem("productos"))|| [];
+
+
 const productos = [
     {
         id: "cpu1",
@@ -75,7 +77,7 @@ function cargadorDeProductos(productos){
     sectionProductos.innerHTML = "";
     productos.forEach((producto) =>{
         let divTarjeta = document.createElement("div");
-        divTarjeta.classList.add("tarjeta")
+        divTarjeta.classList.add("tarjeta", "slide-in-bck-top")
         let divDetalle = document.createElement("div");
         divDetalle.classList.add("detalle-producto")
 
@@ -93,6 +95,20 @@ function cargadorDeProductos(productos){
         boton.innerText = "Agregar a Carrito";
         boton.addEventListener("click", () => {
             agregarCarrito(producto);
+
+            Toastify({
+                text: "Producto agregado al carrito",
+                duration: 2000,
+                style: {
+                    background: "#1c5353", 
+                    color: "#f2fbf9",
+                    fontWeight: "bold",
+                    border: "1px solid #0a2829",
+                    borderRadius: "2rem", 
+                    boxShadow: "0px 0px 10px 5px #f2fbf9",
+                    maxWidth: "20rem",
+                }
+            }).showToast();
         });
     
         divDetalle.append(boton);
@@ -248,7 +264,8 @@ function mostrarCarrito() {
         contenedorCarritoBg.classList.add("d-none");
     }
 
-    calcularTotal();
+    calcularTotalCarrito();
+    mostrarTotal(total);
     contadorCarrito();
     localStorage.setItem("productos", JSON.stringify(carrito));
 };
@@ -278,19 +295,16 @@ function menosCantidad (producto) {
 
 let total = 0;
 
-function calcularTotal() {
+function calcularTotalCarrito() {
     total = 0;
+
     carrito.forEach(
         (item) =>{
             total += (item.precio * item.cantidad);
         });
-
-    spanTotal.forEach ( (span) => {
-        span.innerText = `$${total}`;
-    })
-
-    return total;
 };
+
+
 
 const continuar = document.querySelector("#boton-continuar");
 const elegirEntrega = document.querySelector("#elegir-entrega");
@@ -336,6 +350,10 @@ volverEntrega.addEventListener("click", () => {
     volverEntrega.classList.add("d-none");
     continuarEntrega.classList.add("d-none");
     continuar.classList.remove("d-none");
+    opcionEntregaDom.checked = false;
+    opcionEntregaLoc.checked = false;
+    calcularTotalGlobal();
+    mostrarTotal(total);
 });
 
 const opcionEfectivo = document.querySelector("#pago-efectivo");
@@ -379,6 +397,13 @@ volverPago.addEventListener("click", () => {
     elegirEntrega.classList.remove("d-none");
     volverEntrega.classList.remove("d-none");
     continuarEntrega.classList.remove("d-none");
+    opcionEfectivo.checked = false;
+    opcionDebito.checked = false;
+    opcionCredito.checked = false;
+    opcionEntregaDom.checked = false;
+    opcionEntregaLoc.checked = false;   
+    calcularTotalGlobal()
+    mostrarTotal(total);
 });
 
 const opcionTresCuotas = document.querySelector("#tres-cuotas");
@@ -414,13 +439,41 @@ volverCredito.addEventListener("click", () => {
     volverCredito.classList.add("d-none");
     continuarPago.classList.remove("d-none");
     volverPago.classList.remove("d-none");
+    opcionEfectivo.checked = false;
+    opcionDebito.checked = false;
+    opcionCredito.checked = false;
+    opcionTresCuotas.checked = false;
+    opcionSeisCuotas.checked = false;
+    opcionDoceCuotas.checked = false;
+    calcularTotalGlobal();
+    mostrarTotal(subtotalEntrega);
 });
 
-const mensaje = document.querySelector("#mensaje");
-const continuarMensaje = document.querySelector("#continuar-mensaje");
-
 confirmarSi.addEventListener("click", () => {
-    mensaje.classList.remove("d-none");
+    Swal.fire({
+        title:"¡COMPRA EXITOSA!",
+        text: "Gracias por su compra",
+        icon:"success",
+        showConfirmButton: false,
+        timer: 2000,
+        customClass: "mensaje-alerta",
+        background: "#0a2829",
+    })
+
+    contenedorCarritoSm.classList.remove("d-none");
+    footerCarrito.classList.remove("d-none");
+    continuar.classList.remove("d-none");
+    carrito.splice(0, carrito.length);
+    total = 0;
+    opcionEfectivo.checked = false;
+    opcionDebito.checked = false;
+    opcionCredito.checked = false;
+    opcionEntregaDom.checked = false;
+    opcionEntregaLoc.checked = false;  
+    opcionTresCuotas.checked = false;
+    opcionSeisCuotas.checked = false;
+    opcionDoceCuotas.checked = false; 
+    mostrarCarrito();
     pagar.classList.add("d-none");
 });
 
@@ -429,16 +482,106 @@ confirmarNo.addEventListener("click", () => {
     contenedorCarritoSm.classList.remove("d-none");
     footerCarrito.classList.remove("d-none");
     continuar.classList.remove("d-none");
+    opcionEfectivo.checked = false;
+    opcionDebito.checked = false;
+    opcionCredito.checked = false;
+    opcionEntregaDom.checked = false;
+    opcionEntregaLoc.checked = false;
+    opcionTresCuotas.checked = false;
+    opcionSeisCuotas.checked = false;
+    opcionDoceCuotas.checked = false; 
+    calcularTotalGlobal();
+    mostrarTotal(total);
 });
 
-continuarMensaje.addEventListener("click", () => {
-    mensaje.classList.add("d-none");
-    contenedorCarritoSm.classList.remove("d-none");
-    footerCarrito.classList.remove("d-none");
-    continuar.classList.remove("d-none");
-    carrito.splice(0, carrito.length);
-    total = 0;
-    mostrarCarrito();
-})
+function mostrarTotal(n) {
+    spanTotal.forEach ( (span) => {
+        span.innerText = `$${n}`;
+    })
+}
 
+let subtotalEntrega = 0;
+let subtotalPagoEfectivo = 0;
+let subtotalCuotas = 0;
+let cantidadCuotas = 0;
+
+const tiposEntrega = document.getElementsByName("tipo-entrega");
+const tiposPagos = document.getElementsByName("tipo-pago");
+const tiposCuotas = document.getElementsByName("tipo-cuota");
+const spanCuotas = document.querySelector("#mostrar-cuotas");
+
+function calcularTotalEntrega() {
+    for (let i = 0; i < tiposEntrega.length; i++) {
+        tiposEntrega[i].addEventListener ("change", () => {
+            let costoExtra = parseInt(tiposEntrega[i].value);
+            calcularTotalCarrito();
+            if (costoExtra != 0) {
+                subtotalEntrega = total + costoExtra;
+                mostrarTotal(subtotalEntrega);
+            } else {
+                subtotalEntrega = total;
+                mostrarTotal(subtotalEntrega);
+            };
+        });
+    };
+};
+
+function calcularTotalPagoEfectivo () {
+    for (let i = 0; i < tiposPagos.length; i++) {
+        tiposPagos[i].addEventListener ("change", () => {
+            let opcionPago = tiposPagos[i].value;
+            if (opcionPago === "efectivo") {
+                subtotalPagoEfectivo = subtotalEntrega * 0.85;
+                mostrarTotal(subtotalPagoEfectivo);
+                spanCuotas.classList.add("d-none")
+            }else if (opcionPago === "credito"){
+                subtotalPagoEfectivo = subtotalEntrega;
+                mostrarTotal(subtotalPagoEfectivo);
+                spanCuotas.classList.remove("d-none")
+            }else {
+                subtotalPagoEfectivo = subtotalEntrega;
+                mostrarTotal(subtotalPagoEfectivo);
+                spanCuotas.classList.add("d-none")
+            };
+        });
+    };
+};
+
+function mostrarCuotas (n) {
+    let precioMensual = subtotalCuotas / n;
+    spanCuotas.innerText = `${n} cuotas de $${precioMensual.toFixed(2)}`
+}
+
+function calcularTotalCuota () {
+    for (let i = 0; i < tiposCuotas.length; i++) {
+        tiposCuotas[i].addEventListener ("change", () => {
+            let opcionCuota = parseInt(tiposCuotas[i].value);
+
+            if (opcionCuota === 3) {
+                subtotalCuotas = subtotalPagoEfectivo;
+                mostrarTotal(subtotalCuotas);
+                mostrarCuotas (opcionCuota);
+            } else if (opcionCuota === 6) {
+                subtotalCuotas = subtotalPagoEfectivo * 1.25;
+                mostrarTotal(subtotalCuotas);
+                mostrarCuotas (opcionCuota);
+            } else if (opcionCuota === 12) {
+                subtotalCuotas = subtotalPagoEfectivo * 1.45;
+                mostrarTotal(subtotalCuotas);
+                mostrarCuotas (opcionCuota);
+            }
+        })
+    }
+}
+
+function calcularTotalGlobal() {
+    calcularTotalCarrito();
+    calcularTotalEntrega();
+    calcularTotalPagoEfectivo();
+    calcularTotalCuota ();
+}
+
+
+
+calcularTotalGlobal();
 mostrarCarrito();

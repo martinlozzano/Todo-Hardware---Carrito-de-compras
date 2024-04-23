@@ -70,4 +70,21 @@
             max-height: 250px;
         }
     } 
+
+    @media (max-width: 576px) {
+        .contenedor-carrito {
+            .producto-carrito {
+                border-bottom: 1px solid $--clr-claro;
+
+                .div-cantidad {
+                    padding-inline: 2px;
+                }
+
+                .eliminar-carrito {
+                    font-size: 25px;
+                    margin-block: 15px;
+                }
+            }
+        }
+    }
 }
