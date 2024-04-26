@@ -4,7 +4,7 @@ const carrito = JSON.parse(localStorage.getItem("productos"))|| [];
 
 //Llamada a la API (.json) contenedora de el array de productos.
 
-fetch("./productos.json")
+fetch("./data/productos.json")
     .then((resp) => resp.json())
     .then((data) => {
         cargadorDeProductos(data);
