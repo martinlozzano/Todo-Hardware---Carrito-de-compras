@@ -127,11 +127,9 @@ header {
         }
 
         @media (max-width: 650px) {
-            .container-fluid {
-                h1 {
-                    font-size: 28px;
-                }
+            width: 100%;
 
+            .container-fluid {
                 .contenedor-carrito-boton {
                     gap: 3rem;
                     .contenedor-boton *{
@@ -158,6 +156,10 @@ header {
             width: 100%;
 
             .container-fluid {
+                h1 {
+                    font-size: 28px;
+                }
+
                 button {
                     width: 2.8rem;
                 }
@@ -190,4 +192,4 @@ header {
             }
         }
     }
-  }
+}

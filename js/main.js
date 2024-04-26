@@ -1,75 +1,16 @@
+//Local Storage.
+
 const carrito = JSON.parse(localStorage.getItem("productos"))|| [];
 
+//Llamada a la API (.json) contenedora de el array de productos.
 
-const productos = [
-    {
-        id: "cpu1",
-        nombre: "Ryzen 5 5600g",
-        precio: 8000,
-        imagen: "./img/cpu1.png",
-    },
-    {
-        id: "cpu2",
-        nombre: "Intel Core I3 10105",
-        precio: 13000,
-        imagen: "./img/cpu2.png",
-    },
-    {
-        id: "gpu1",
-        nombre: "Placa de Video RTX 3050",
-        precio: 25000,
-        imagen: "./img/gpu1.png",
-    },
-    {
-        id: "gpu2",
-        nombre: "Placa de Video RTX 4060 Ti",
-        precio: 30000,
-        imagen: "./img/gpu2.png",
-    },
-    {
-        id: "disco1",
-        nombre: "Disco Sólido SSD 240GB Kingstone",
-        precio: 5600,
-        imagen: "./img/disco1.jpg",
-    },
-    {
-        id: "disco2",
-        nombre: "Disco Sólido SSD 240GB WD Green",
-        precio: 9000,
-        imagen: "./img/disco2.jpg",
-    },
-    {
-        id: "disco2",
-        nombre: "Disco Sólido SSD 240GB WD Green",
-        precio: 9000,
-        imagen: "./img/disco2.jpg",
-    },
-    {
-        id: "disco2",
-        nombre: "Disco Sólido SSD 240GB WD Green",
-        precio: 9000,
-        imagen: "./img/disco2.jpg",
-    },
-    {
-        id: "disco2",
-        nombre: "Disco Sólido SSD 240GB WD Green",
-        precio: 9000,
-        imagen: "./img/disco2.jpg",
-    },
-    {
-        id: "disco2",
-        nombre: "Disco Sólido SSD 240GB WD Green",
-        precio: 9000,
-        imagen: "./img/disco2.jpg",
-    },
-    {
-        id: "disco2",
-        nombre: "Disco Sólido SSD 240GB WD Green",
-        precio: 9000,
-        imagen: "./img/disco2.jpg",
-    },
+fetch("./productos.json")
+    .then((resp) => resp.json())
+    .then((data) => {
+        cargadorDeProductos(data);
+    })
 
-]
+//Función que carga los productos al DOM.
 
 const sectionProductos = document.querySelector("#productos")
 
@@ -117,9 +58,9 @@ function cargadorDeProductos(productos){
     })
 };
 
-cargadorDeProductos(productos);
 
 //FUNCION AGREGAR AL CARRITO
+
 const carritoContador = document.querySelector("#contador-carrito");
 const carritoFlotanteContador = document.querySelector("#contador-carrito-flotante");
 
@@ -149,10 +90,24 @@ function contadorCarrito() {
     }
 };
 
-//BOTON DARK MODE
+//DARK MODE.
 
 const colorDark = document.querySelector("#dark-button");
-const body = document.querySelector("body");
+const body = document.body;
+
+//Revisar LS para saber en que modo iniciar.
+
+if (localStorage.getItem("drk-mode") === "claro") {
+    body.classList.remove("dark-mode")
+    colorDark.classList.add("bi-moon");
+    colorDark.classList.remove("bi-sun");
+} else {
+    body.classList.add("dark-mode")
+    colorDark.classList.add("bi-sun");
+    colorDark.classList.remove("bi-moon");
+}
+
+//Evento de botón.
 
 colorDark.addEventListener("click", () =>{
     body.classList.toggle("dark-mode");
@@ -160,9 +115,11 @@ colorDark.addEventListener("click", () =>{
     if (colorDark.classList.contains("bi-moon")) {
         colorDark.classList.remove("bi-moon");
         colorDark.classList.add("bi-sun");
+        localStorage.setItem("drk-mode", "oscuro")
     }else {
         colorDark.classList.remove("bi-sun");
         colorDark.classList.add("bi-moon");
+        localStorage.setItem("drk-mode", "claro")
     };    
 });
 
@@ -174,9 +131,12 @@ const contenedorCarritoBg = document.querySelector ("#bg-contenedor-carrito");
 const contenedorCarritoSm = document.querySelector ("#contenedor-carrito");
 const cerrarCarrito = document.querySelector ("#cerrar-carrito");
 const header = document.querySelector("#header");
-const alturaHeader = header.offsetHeight;
 const carritoFlotante = document.querySelector("#carrito-flotante");
 const carritoHeader = document.querySelector ("#carrito-header");
+
+//Función para hacer que el carrito aparezca abajo a la izquierda cuando se scrollea (solo si hay productos en el mismo).
+
+const alturaHeader = header.offsetHeight;
 
 function carritoScroll () {
     const scrollTop = document.documentElement.scrollTop;
@@ -217,6 +177,8 @@ cerrarCarrito.addEventListener("click", () => {
         }
     }
 });
+
+//Función para que aparezcan los productos seleccionados en el carrito.
 
 function mostrarCarrito() {
     contenedorCarritoSm.innerHTML = ""; 
@@ -270,6 +232,8 @@ function mostrarCarrito() {
     localStorage.setItem("productos", JSON.stringify(carrito));
 };
 
+//Funcionalidades dentro del carrito.
+
 function eliminarCarrito(producto) {
     let indiceEliminar = carrito.findIndex(productos => productos.id === producto.id);
 
@@ -304,7 +268,7 @@ function calcularTotalCarrito() {
         });
 };
 
-
+//Funcionalidad primer botón continuar.
 
 const continuar = document.querySelector("#boton-continuar");
 const elegirEntrega = document.querySelector("#elegir-entrega");
@@ -319,6 +283,8 @@ continuar.addEventListener("click", () => {
     volverEntrega.classList.remove("d-none");
     continuarEntrega.classList.remove("d-none");
 });
+
+//Funcionalidad de la sección para seleccionar tipo de entrega.
 
 const opcionEntregaLoc = document.querySelector("#entrega-local");
 const opcionEntregaDom = document.querySelector("#entrega-domicilio");
@@ -355,6 +321,8 @@ volverEntrega.addEventListener("click", () => {
     calcularTotalGlobal();
     mostrarTotal(total);
 });
+
+//Funcionalidad de la sección para seleccionar forma de pago.
 
 const opcionEfectivo = document.querySelector("#pago-efectivo");
 const opcionDebito = document.querySelector("#pago-debito");
@@ -406,6 +374,8 @@ volverPago.addEventListener("click", () => {
     mostrarTotal(total);
 });
 
+//Funcionalidad de la sección para seleccionar tipo de crédito.
+
 const opcionTresCuotas = document.querySelector("#tres-cuotas");
 const opcionSeisCuotas = document.querySelector("#seis-cuotas");
 const opcionDoceCuotas = document.querySelector("#doce-cuotas");
@@ -448,6 +418,8 @@ volverCredito.addEventListener("click", () => {
     calcularTotalGlobal();
     mostrarTotal(subtotalEntrega);
 });
+
+//Funcionalidad de la sección confirmar compra.
 
 confirmarSi.addEventListener("click", () => {
     Swal.fire({
@@ -493,6 +465,8 @@ confirmarNo.addEventListener("click", () => {
     calcularTotalGlobal();
     mostrarTotal(total);
 });
+
+//Funciones para calcular el total de cada sección según las opciones que se elijan.
 
 function mostrarTotal(n) {
     spanTotal.forEach ( (span) => {
@@ -580,8 +554,6 @@ function calcularTotalGlobal() {
     calcularTotalPagoEfectivo();
     calcularTotalCuota ();
 }
-
-
 
 calcularTotalGlobal();
 mostrarCarrito();

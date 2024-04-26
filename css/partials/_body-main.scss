@@ -9,7 +9,12 @@ main {
         height: 600px;
         justify-content: center;
         opacity: .9;
-
+        @media (max-width: 992px) {
+            height: 450px;
+        }  
+        @media (max-width: 768px) {
+            height: 350px;
+        }  
         @media (max-width: 576px) {
             height: 250px;
         }           

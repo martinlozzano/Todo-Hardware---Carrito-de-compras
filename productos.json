@@ -1,0 +1,68 @@
+[
+    {
+        "id": "cpu1",
+        "nombre": "Ryzen 5 5600g",
+        "precio": 8000,
+        "imagen": "./img/cpu1.png"
+    },
+    {
+        "id": "cpu2",
+        "nombre": "Intel Core I3 10105",
+        "precio": 13000,
+        "imagen": "./img/cpu2.png"
+    },
+    {
+        "id": "gpu1",
+        "nombre": "Placa de Video RTX 3050",
+        "precio": 25000,
+        "imagen": "./img/gpu1.png"
+    },
+    {
+        "id": "gpu2",
+        "nombre": "Placa de Video RTX 4060 Ti",
+        "precio": 30000,
+        "imagen": "./img/gpu2.png"
+    },
+    {
+        "id": "disco1",
+        "nombre": "Disco Sólido SSD 240GB Kingstone",
+        "precio": 5600,
+        "imagen": "./img/disco1.jpg"
+    },
+    {
+        "id": "disco2",
+        "nombre": "Disco Sólido SSD 240GB WD Green",
+        "precio": 9000,
+        "imagen": "./img/disco2.jpg"
+    },
+    {
+        "id": "disco2",
+        "nombre": "Disco Sólido SSD 240GB WD Green",
+        "precio": 9000,
+        "imagen": "./img/disco2.jpg"
+    },
+    {
+        "id": "disco2",
+        "nombre": "Disco Sólido SSD 240GB WD Green",
+        "precio": 9000,
+        "imagen": "./img/disco2.jpg"
+    },
+    {
+        "id": "disco2",
+        "nombre": "Disco Sólido SSD 240GB WD Green",
+        "precio": 9000,
+        "imagen": "./img/disco2.jpg"
+    },
+    {
+        "id": "disco2",
+        "nombre": "Disco Sólido SSD 240GB WD Green",
+        "precio": 9000,
+        "imagen": "./img/disco2.jpg"
+    },
+    {
+        "id": "disco2",
+        "nombre": "Disco Sólido SSD 240GB WD Green",
+        "precio": 98000,
+        "imagen": "./img/disco2.jpg"
+    }
+]

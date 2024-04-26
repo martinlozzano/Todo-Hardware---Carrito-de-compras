@@ -18,6 +18,10 @@
                     .menu-link {
                         color: $--clr-muyClaro;
                     }
+
+                    @media (max-width: 992px) {
+                        background-color: rgba($--clr-muyOscuro, .9);
+                    }
                 }
             }
 
@@ -34,7 +38,6 @@
 
     main {
         background-color: $--clr-casiMuyOscuro;
-        color: $--clr-claro;
 
         .titulo-seccion {
             background-color: $--clr-base;
@@ -70,9 +73,35 @@
         background-color: $--clr-oscuro;
         .contenedor-carrito {
             color: $--clr-muyClaro;
+            .producto-carrito {
+                border-bottom: 1px solid $--clr-claro;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+            }
         }
         .formularios {
-            color: $--clr-muyOscuro;
+            color: $--clr-muyClaro;
+
+            li {
+                border-color: $--clr-claro;
+            }
+        }
+
+        .confirmar-pagar {
+            color: $--clr-muyClaro;
+
+            .mostrar-cuotas span{
+                border-color: $--clr-claro;
+            }
+
+            button {
+                background-color: $--clr-muyOscuro;
+                color: $--clr-muyClaro;
+                border: 1px solid $--clr-claro;
+            }
         }
     }
 

@@ -1,7 +1,7 @@
 .confirmar-pagar {
     min-height: 200px;
     max-height: 350px;
-    margin: 10px 20px 40px 20px;
+    margin: 10px 20px 30px 20px;
     color: $--clr-muyOscuro;
     align-items: center;
     justify-content: center;
@@ -64,25 +64,3 @@
         font-size: 20px;
     }
 }
-
-/* .mensaje {
-    height: 200px;
-    margin: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 3rem;
-    font-size: 30px;
-    color: $--clr-muyOscuro;
-    span {
-        text-decoration: underline;
-        text-align: center;
-    }
-    button {
-        width: 14rem;
-        border: 1px solid $--clr-oscuro;
-        border-radius: 2rem;
-        background-color: $--clr-muyClaro;
-        color: $--clr-muyOscuro;
-    }
-} */
