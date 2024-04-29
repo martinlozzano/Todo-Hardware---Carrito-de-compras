@@ -174,14 +174,37 @@ header .contenedor-header .container-fluid .navegacion .menu .menu-link:hover {
 
 footer {
   background-color: #0a2829;
-  height: 60px;
+  display: flex;
+  padding: 15px 40px;
+  justify-content: space-between;
+  align-items: center;
 }
 footer .copyright p {
   display: flex;
-  justify-content: center;
   align-items: center;
   color: #f2fbf9;
-  height: 60px;
+  margin-bottom: 0;
+  font-size: 20px;
+}
+footer .redes {
+  width: 170px;
+  display: flex;
+  justify-content: end;
+  gap: 1.5rem;
+}
+footer .redes a {
+  color: #f2fbf9;
+  font-size: 35px;
+}
+@media (max-width: 576px) {
+  footer {
+    flex-direction: column-reverse;
+    padding: 15px 40px;
+    gap: 1rem;
+  }
+  footer .redes {
+    justify-content: center;
+  }
 }
 
 main {

@@ -1,12 +1,37 @@
 footer {
     background-color: $--clr-muyOscuro;
-    height: 60px;
-
+    display: flex;
+    padding: 15px 40px;
+    justify-content: space-between;
+    align-items: center;
+    
     .copyright p{
         display: flex;
-        justify-content: center;
         align-items: center;
         color: $--clr-muyClaro;
-        height: 60px;
+        margin-bottom: 0;
+        font-size: 20px;
+    }
+
+    .redes {
+        width: 170px;
+        display: flex;
+        justify-content: end;
+        gap: 1.5rem;    
+
+        a {
+            color: $--clr-muyClaro;
+            font-size: 35px;
+        }
+    }
+
+    @media (max-width: 576px) {
+        flex-direction: column-reverse;
+        padding: 15px 40px;
+        gap: 1rem;
+
+        .redes {
+            justify-content: center;
+        }
     }
 }
